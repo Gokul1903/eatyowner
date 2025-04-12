@@ -31,7 +31,7 @@ function App() {
       <Routes>
           
           
-          <Route path="/Login" element={<Login/>} ></Route>
+          <Route path="/" element={<Login/>} ></Route>
           
           <Route path="/*" element={<MainLayout/>} ></Route>
           
