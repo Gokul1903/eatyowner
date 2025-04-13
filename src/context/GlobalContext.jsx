@@ -7,7 +7,7 @@ const GlobalProvider = ({ children }) => {
   const [order, setOrder] = useState([]);
   const [products, setProducts] = useState([]);
   const [errmessage,setMessage]=useState("")
-
+  const [singleproduct,setSingleproduct]=useState("")
 
   
 
@@ -88,6 +88,39 @@ const GlobalProvider = ({ children }) => {
       console.error("Error cancelling order:", error);
     }
   };
+  const fetchProduct =async()=>{
+    try {
+      const responce=await fetch(`${API_URL}/owner/viewproduct`,{
+        method:"GET",
+        credentials:"include"
+      })
+      const data=await responce.json()
+      if(data.success){
+        setProducts(data.products)
+
+      }
+      else {
+        console.error( data.message);
+      }
+    } catch (error) {
+      console.error( error);
+    }
+  }
+  const fetchSingle=async(id)=>{
+    try {
+        const response =await fetch(`${API_URL}/owner/viewproductsingle/${id}`)
+        const data=await response.json();
+        if(data.success){
+            setSingleproduct(data.product)
+
+        }
+        else{
+            console.error("failed to fetch product :",data.message)
+        }
+    } catch (error) {
+        console.error("error fetching products: ",error)
+    }
+}
 
   const addProduct = async (formData) => {
     try {
@@ -154,6 +187,7 @@ const GlobalProvider = ({ children }) => {
         products,
         orders,
         fetchOrder,
+        fetchProduct,
         updateOrderStatus,
         cancelOrder,
         addProduct,
@@ -162,7 +196,9 @@ const GlobalProvider = ({ children }) => {
         singleorder,
         order,
         errmessage,
-        setOrders
+        setOrders,
+        singleproduct,
+        fetchSingle
         
       }}
     >

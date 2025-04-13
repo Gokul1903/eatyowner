@@ -10,6 +10,9 @@ import Login from "./authComponent/login";
 
 import NotFound from "./components/NotFound";
 import Delivered from "./components/Delivered";
+import Products from "./components/products";
+import UpdateProduct from "./components/Update";
+
 
 const MainLayout=()=>{
   return(<div className="container ">
@@ -17,9 +20,13 @@ const MainLayout=()=>{
         <Navbar />
         <Routes>
           <Route path="/Home" element={<CardList />} />
+          <Route path="/Products" element={<Products />} />
+          <Route path="/update/:id" element={<UpdateProduct />} />
           <Route path="/Delivered" element={<Delivered />} />
+          
           <Route path="/Order/:id" element={<ProductDetails/>} />
           <Route path="*" element={<NotFound/>} />
+
         </Routes>
         </div>
       </div>

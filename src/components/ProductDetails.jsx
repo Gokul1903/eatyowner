@@ -19,9 +19,7 @@ const ProductDetails = () => {
   }, [id]);
 
   const navigate = useNavigate();
-  const handlesubmit = async (e) => {
-    e.preventDefault();
-  };
+  
 
   if (order.length === 0) {
     return (

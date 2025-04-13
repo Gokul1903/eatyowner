@@ -117,6 +117,17 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="nav-item">
+              <Link
+                className={`nav-link ${
+                  location.pathname === "/Products" ? "active" : ""
+                }`}
+                to="/Products"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <i className="bi bi-box-seam"></i> Products
+              </Link>
+            </li>
+            <li className="nav-item">
               <button
                 className="nav-link btn-link"
                 onClick={() => {
