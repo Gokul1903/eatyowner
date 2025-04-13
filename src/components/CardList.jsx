@@ -38,25 +38,32 @@ const CardList = () => {
       </div>
     );
   }
+  
   return (
     <section className="py-5">
       <div className="container">
         <div className="row">
           
-        {orders.map((order) => (
-    order.status !== "delivered"   && (
-        <div className="col-md-6" key={order._id}>
-            <Card
-                user={order.userId.name}
-                address={order.Address}
-                totalAmount={order.totalAmount}
-                paymentMethod={order.paymentMethod}
-                items={order.items}
-                id={order._id}
-            />
-        </div>
+        {orders.filter(order => order.status !== "delivered").length > 0 ? (
+  orders.map((order) => (
+    order.status !== "delivered" && (
+      <div className="col-md-6" key={order._id}>
+        <Card
+          user={order.userId.name}
+          address={order.Address}
+          totalAmount={order.totalAmount}
+          paymentMethod={order.paymentMethod}
+          items={order.items}
+          id={order._id}
+        />
+      </div>
     )
-))}
+  ))
+) : (
+  <div className="col-md-12">
+    <h1 style={{ fontWeight: "bold" }} className="text-center text-white">Order Not Avaiable </h1>
+  </div>
+)}
         </div>
       </div>
     </section>

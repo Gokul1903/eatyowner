@@ -142,16 +142,7 @@
 
 }
 
-/* Hides the >> icon */
-.my-slide-button {
-  border-radius: 30px;
-  background-color: #f0f0f0; /* Example background color */
-}
 
-.my-slide-button .slide-button-text {
-  color: blue; /* Example text color */
-}
 
-.my-slide-button .slide-button-slider {
-  background-color: red; /* Example slider color */
-}
+
+
