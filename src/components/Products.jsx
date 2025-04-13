@@ -1,6 +1,7 @@
 import { useEffect, useContext } from "react";
 import ProductCard from "./ProductCard";
 import { GlobalContext } from "../context/GlobalContext";
+import { Link } from "react-router-dom";
 
 const Products = () => {
   const { products, fetchProduct } = useContext(GlobalContext);
@@ -40,6 +41,7 @@ const Products = () => {
               />
             </div>
           ))}
+          <Link className="text-white" to={"/add"}>+</Link>
         </div>
       </div>
     </section>

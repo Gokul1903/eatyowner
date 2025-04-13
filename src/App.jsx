@@ -12,6 +12,7 @@ import NotFound from "./components/NotFound";
 import Delivered from "./components/Delivered";
 import Products from "./components/Products";
 import UpdateProduct from "./components/Update";
+import AddProduct from "./components/Addproduct";
 
 
 const MainLayout=()=>{
@@ -23,7 +24,7 @@ const MainLayout=()=>{
           <Route path="/Products" element={<Products />} />
           <Route path="/update/:id" element={<UpdateProduct />} />
           <Route path="/Delivered" element={<Delivered />} />
-          
+          <Route path="/add" element={<AddProduct />} />
           <Route path="/Order/:id" element={<ProductDetails/>} />
           <Route path="*" element={<NotFound/>} />
 
