@@ -46,7 +46,7 @@ const UpdateProduct = () => {
     setMessage("Product updated successfully!");
 
     setTimeout(() => {
-      navigate("/owner/products");
+      navigate("/Products");
     }, 1500);
   };
 
@@ -59,6 +59,18 @@ const UpdateProduct = () => {
       </div>
     );
   }
+  let imageSrc = "";
+
+if (!image) {
+  imageSrc = "/images/no-image.png";
+} else if (typeof image === "string") {
+  const fileName = image.split('/').pop(); // only if it's a path string
+  const ext = image.split('.').pop();
+  imageSrc = `${IMG_URI}/eaty-images/${fileName}.${ext}`;
+} else {
+  imageSrc = URL.createObjectURL(image); // it's a File object
+}
+
 
   return (
     <section className="d-flex justify-content-center" style={{ minHeight: "100vh" }}>
@@ -66,17 +78,13 @@ const UpdateProduct = () => {
         <div className="row">
           <div className="col-12">
             <div className="card text-center mx-auto my-3" style={{ width: "100%", maxWidth: "400px", border: "none" }}>
-              <img
-                className="card-img-top rounded-4 mb-3"
-                src={
-                  image
-                    ? URL.createObjectURL(image)
-                    : `${IMG_URI}/eaty-images/${singleproduct.image.split("/").pop()}`
-                }
-                alt="product"
-                style={{ height: "250px", objectFit: "cover" }}
-                loading="lazy"
-              />
+            <img
+  className="card-img-top rounded-4 mb-3"
+  src={imageSrc}
+  style={{ height: "250px", objectFit: "cover" }}
+  loading="lazy"
+/>
+
               <div className="nav-bg text-white rounded-bottom-4 p-3">
                 <form onSubmit={handleSubmit}>
                   <div className="mb-3 text-start">

@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
 const API_URL = import.meta.env.VITE_API_URL;
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 const IMG_URI=import.meta.env.VITE_CLOUDINARY_BASE_URL
+import { GlobalContext } from "../context/GlobalContext";
 const ProductCard = ({ title, price,id,image}) => {
+    const navigate=useNavigate()
+    const { deleteProduct } = useContext(GlobalContext);
     return (
       <div className="card my-3 "  style={{ width: "100%",border:"none" }}>
         <img 
@@ -20,6 +25,19 @@ const ProductCard = ({ title, price,id,image}) => {
           <div className="">
             
           <Link to={`/update/${id}`} className="buybtn py-2">Update</Link>
+          <button
+                    className=" cancelbtn mt-3"
+                    
+                    onClick={async () => {
+                      const confirmUpdate = window.confirm("Are you sure?");
+                      if (confirmUpdate) {
+                        await deleteProduct(id);
+                        navigate("/Products");
+                      }
+                    }}
+                  >
+                    Cancel
+                  </button>
           
         </div>
 

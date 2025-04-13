@@ -108,7 +108,10 @@ const GlobalProvider = ({ children }) => {
   }
   const fetchSingle=async(id)=>{
     try {
-        const response =await fetch(`${API_URL}/owner/viewproductsingle/${id}`)
+        const response =await fetch(`${API_URL}/owner/viewproductsingle/${id}`,{
+          method:"GET",
+          credentials:"include"
+        })
         const data=await response.json();
         if(data.success){
             setSingleproduct(data.product)
