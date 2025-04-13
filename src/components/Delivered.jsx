@@ -3,7 +3,7 @@ import { GlobalContext } from "../context/GlobalContext";
 import Card from "./Card"
 
 
-const CardList = () => {
+const Delivered = () => {
   const { orders, fetchOrder,errmessage } = useContext(GlobalContext);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const CardList = () => {
         <div className="row">
           
         {orders.map((order) => (
-    order.status !== "delivered"   && (
+    order.status === "delivered"   && (
         <div className="col-md-6" key={order._id}>
             <Card
                 user={order.userId.name}
@@ -63,4 +63,4 @@ const CardList = () => {
   );
 };
 
-export default CardList;
+export default Delivered;

@@ -9,6 +9,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import Login from "./authComponent/login";
 
 import NotFound from "./components/NotFound";
+import Delivered from "./components/Delivered";
 
 const MainLayout=()=>{
   return(<div className="container ">
@@ -16,6 +17,7 @@ const MainLayout=()=>{
         <Navbar />
         <Routes>
           <Route path="/Home" element={<CardList />} />
+          <Route path="/Delivered" element={<Delivered />} />
           <Route path="/Order/:id" element={<ProductDetails/>} />
           <Route path="*" element={<NotFound/>} />
         </Routes>

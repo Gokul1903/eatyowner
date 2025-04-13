@@ -46,6 +46,11 @@ const Navbar = () => {
                 <i className="bi bi-border-style"></i> Order
               </Link>
             </li>
+            <li className="nav-item">
+              <Link className={`nav-link ${location.pathname === "/Delivered" ? "active" : ""}`} to="/Delivered">
+                <i className="bi bi-border-style"></i> Delivered
+              </Link>
+            </li>
             {/* <li className="nav-item ">
               <Link className={`nav-link ${location.pathname === "/profile" ? "active" : ""}`} to="/profile">
                 <i className="bi bi-person"></i> Profile
