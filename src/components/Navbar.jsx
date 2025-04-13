@@ -15,7 +15,7 @@ const Navbar = () => {
   
       if (data.success) {
         // Optional: redirect to login or home
-        navigate("/Login") // Or use navigate("/Login") if you want to use `useNavigate`
+        navigate("/") // Or use navigate("/Login") if you want to use `useNavigate`
       } else {
         alert("Logout failed: " + data.message);
       }
