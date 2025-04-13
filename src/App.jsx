@@ -10,7 +10,7 @@ import Login from "./authComponent/login";
 
 import NotFound from "./components/NotFound";
 import Delivered from "./components/Delivered";
-import Products from "./components/products";
+import Products from "./components/Products";
 import UpdateProduct from "./components/Update";
 
 
