@@ -110,7 +110,7 @@ const ProductDetails = () => {
                     }
                   }}
                 >
-                  Cancel
+                  Remove
                 </button>
               </div>
             </div>
