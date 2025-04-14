@@ -41,7 +41,7 @@ const Products = () => {
               />
             </div>
           ))}
-          <Link className="text-white" to={"/add"}>+</Link>
+          <Link className="add-btn " to={"/add"}><i class="bi bi-bag-plus-fill"></i></Link>
         </div>
       </div>
     </section>
