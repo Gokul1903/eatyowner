@@ -6,7 +6,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const { order, singleorder, updateOrderStatus, cancelOrder } = useContext(GlobalContext);
+  const { order, singleorder, updateOrderStatus, cancelOrder,errmessage } = useContext(GlobalContext);
 
   const [buttonstate, setButtonState] = useState("");
   const [address, setAddress] = useState("");
@@ -30,6 +30,17 @@ const ProductDetails = () => {
         </div>
       </div>
     );
+  }
+  if(errmessage==="Unauthorized" || errmessage==="Invalid Token"){
+    return(
+      <section className="py-5">
+      <div className="container">
+        <div className="row">
+          <h1 className="text-center">Unauthorized</h1>
+        </div>
+      </div>
+    </section>
+    )
   }
 
   return (
