@@ -40,23 +40,14 @@ const CardList = () => {
       });
 
       // Optional: You can trigger browser notification too
-      if ("Notification" in window && Notification.permission === "granted") {
-        new Notification("📦 Order!", {
-          body: "Hurry up ",
-          icon: "/favicon.png"
-        });
-      }
+
     }
 
     setOldLength(newLength); // update oldLength after comparison
   }, [newLength]);
 
   // Ask notification permission once
-  useEffect(() => {
-    if ("Notification" in window) {
-      Notification.requestPermission();
-    }
-  }, []);
+  
 
   // Unauthorized
   if (errmessage === "Unauthorized" || errmessage === "Invalid Token") {
