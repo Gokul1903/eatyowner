@@ -11,6 +11,7 @@ const UpdateProduct = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [image, setImage] = useState(null);
+  const[availability,setAvailability]=useState(0);
   const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
@@ -23,13 +24,15 @@ const UpdateProduct = () => {
     if (singleproduct) {
       setName(singleproduct.name);
       setPrice(singleproduct.price);
+      setAvailability(singleproduct.availability)
+      setImage(singleproduct.image)
     }
   }, [singleproduct]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!name || !price) {
+    if (!name || !price || !availability) {
       setMessage("Name and price are required.");
       return;
     }
@@ -38,6 +41,7 @@ const UpdateProduct = () => {
     formData.append("productId", singleproduct._id);
     formData.append("name", name);
     formData.append("price", price);
+    formData.append("availability", availability);
     if (image) {
       formData.append("image", image);
     }
@@ -59,6 +63,7 @@ const UpdateProduct = () => {
       </div>
     );
   }
+  
   let imageSrc = "";
 
 if (!image) {
@@ -105,6 +110,18 @@ if (!image) {
                       className="form-control"
                       value={price}
                       onChange={(e) => setPrice(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div className="mb-3 text-start">
+                    <label htmlFor="availability" className="form-label ">Availability </label>
+                    <input
+                      id="availability"
+                      type="number"
+                      className="form-control"
+                      min={0}
+                      value={availability}
+                      onChange={(e) => setAvailability(e.target.value)}
                       required
                     />
                   </div>
