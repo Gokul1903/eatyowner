@@ -97,11 +97,14 @@ const CardList = () => {
               ) : null
             )
           ) : (
-            <div className="col-md-12">
-              <h1 style={{ fontWeight: "bold" }} className="text-center text-white">
-                Order Not Available
-              </h1>
-            </div>
+            
+                <section className="py-5">
+                  <div className="container text-center text-white ">
+                    <h2>No order history</h2>
+                  </div>
+                </section>
+              
+            
           )}
         </div>
       </div>
