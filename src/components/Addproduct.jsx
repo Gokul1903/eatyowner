@@ -31,6 +31,8 @@ const AddProduct = () => {
     
     formData.append("name", name);
     formData.append("price", price);
+    formData.append("availability", 0);
+    
     if (image) {
       formData.append("image", image);
     }

@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 const IMG_URI=import.meta.env.VITE_CLOUDINARY_BASE_URL
 import { GlobalContext } from "../context/GlobalContext";
-const ProductCard = ({ title, price,id,image}) => {
+const ProductCard = ({ title, price,id,image,availability}) => {
     const navigate=useNavigate()
     const { deleteProduct } = useContext(GlobalContext);
     return (
@@ -21,7 +21,8 @@ const ProductCard = ({ title, price,id,image}) => {
         
           <h5 className="card-title text-center py-2 text-capitalize">{title} </h5>
           
-          <p className="card-text text-center pb-4">₹{price}/-</p>
+          <p className="card-text text-center pb-2">₹{price}/-</p>
+          {!availability ? <p className="card-text text-center pb-1 text-danger">Not available</p>:null}
           <div className="">
             
           <Link to={`/update/${id}`} className="buybtn py-2">Update</Link>
