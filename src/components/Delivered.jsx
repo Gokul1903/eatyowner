@@ -35,7 +35,7 @@ const Delivered = () => {
       <section className="py-5">
         <div className="container">
           <div className="row">
-            <h1 className="text-center">No Delivered Product Available</h1>
+            <h1 className="text-center">No Order Delivered </h1>
           </div>
         </div>
       </section>
