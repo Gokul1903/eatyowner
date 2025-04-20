@@ -1,13 +1,18 @@
-import { useEffect, useContext } from "react";
+import { useEffect, useContext,useState } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 import Card from "./Card"
 
 
 const Delivered = () => {
   const { orders, fetchOrder,errmessage } = useContext(GlobalContext);
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    fetchOrder();
+    const fetchdata=async()=>{
+      await fetchOrder();
+      setLoading()
+    }
+    fetchdata()
+    
     const interval = setInterval(() => {
       fetchOrder();
     }, 5000); 
@@ -26,6 +31,17 @@ const Delivered = () => {
     )
   }
   if (orders.length === 0) {
+    return (
+      <section className="py-5">
+        <div className="container">
+          <div className="row">
+            <h1 className="text-center">No Delivered Product Available</h1>
+          </div>
+        </div>
+      </section>
+    );
+  }
+  if (loading) {
     return (
       <div
         className="d-flex justify-content-center align-items-center"

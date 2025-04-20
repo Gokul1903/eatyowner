@@ -1,17 +1,22 @@
-import { useEffect, useContext } from "react";
+import { useEffect, useContext ,useState} from "react";
 import ProductCard from "./ProductCard";
 import { GlobalContext } from "../context/GlobalContext";
 import { Link } from "react-router-dom";
 
 const Products = () => {
   const { products, fetchProduct } = useContext(GlobalContext);
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    fetchProduct();
+    const fetchdata=async()=>{
+      await fetchProduct();
+      setLoading(false)
+    }
+    fetchdata();
+    
   }, []);
 
   // Show full-screen centered spinner when loading
-  if (products.length === 0) {
+  if (loading) {
     return (
       <div
         className="d-flex justify-content-center align-items-center"
@@ -22,6 +27,18 @@ const Products = () => {
           
         </div>
       </div>
+    );
+  }
+  if (products.length === 0) {
+    return (
+      <section className="py-5">
+        <div className="container">
+          <div className="row">
+            <h1 className="text-center">No Product Available</h1>
+            <Link className="add-btn " to={"/add"}><i className="bi bi-bag-plus-fill"></i></Link>
+          </div>
+        </div>
+      </section>
     );
   }
 

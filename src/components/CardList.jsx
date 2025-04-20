@@ -4,6 +4,7 @@ import Card from "./Card";
 
 const CardList = () => {
   const { orders, fetchOrder, errmessage } = useContext(GlobalContext);
+  const [loading, setLoading] = useState(true);
 
   const [oldLength, setOldLength] = useState(0);
   const [newLength, setNewLength] = useState(0);
@@ -17,7 +18,12 @@ const CardList = () => {
 
   // Fetch orders periodically
   useEffect(() => {
-    fetchOrder();
+    const fetchdata=async()=>{
+      await fetchOrder();
+      setLoading(false)
+    }
+    fetchdata()
+    
 
     const interval = setInterval(() => {
       fetchOrder();
@@ -33,7 +39,7 @@ const CardList = () => {
 
   // Compare newLength and oldLength
   useEffect(() => {
-    if (newLength > oldLength) {
+    if (newLength > oldLength && orders.length !== 0) {
       
       alarm.current.play().catch((err) => {
         console.error("❌ Failed to play alarm:", err);
@@ -63,7 +69,7 @@ const CardList = () => {
   }
 
   // Loading
-  if (orders.length === 0) {
+  if (loading) {
     return (
       <div
         className="d-flex justify-content-center align-items-center"
@@ -73,6 +79,18 @@ const CardList = () => {
           <span className="visually-hidden">Loading...</span>
         </div>
       </div>
+    );
+  }
+
+  if (orders.length === 0) {
+    return (
+      <section className="py-5">
+        <div className="container">
+          <div className="row">
+            <h1 className="text-center">No Order Available</h1>
+          </div>
+        </div>
+      </section>
     );
   }
 
