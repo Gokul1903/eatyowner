@@ -9,7 +9,6 @@ const CardList = () => {
   const [oldLength, setOldLength] = useState(0);
   const [newLength, setNewLength] = useState(0);
   const alarm = useRef(new Audio("/alarm.mp3"));
-
   // Load audio on mount
   useEffect(() => {
     alarm.current.volume = 1.0;
@@ -38,19 +37,19 @@ const CardList = () => {
   }, [orders]);
 
   // Compare newLength and oldLength
+  
+
+  
   useEffect(() => {
-    if (newLength > oldLength && orders.length !== 0) {
-      
+    if (newLength > oldLength && orders.length !== 0 ) {
       alarm.current.play().catch((err) => {
         console.error("❌ Failed to play alarm:", err);
       });
-
-      // Optional: You can trigger browser notification too
-
     }
-
-    setOldLength(newLength); // update oldLength after comparison
+  
+    setOldLength(newLength);
   }, [newLength]);
+  
 
   // Ask notification permission once
   
@@ -97,36 +96,35 @@ const CardList = () => {
   // UI
   return (
     <section className="py-5">
-      <div className="container">
-        <div className="row">
-          {orders.filter((order) => order.status !== "delivered").length > 0 ? (
-            orders.map((order) =>
-              order.status !== "delivered" ? (
-                <div className="col-md-6" key={order._id}>
-                  <Card
-                    user={order.userId.name}
-                    address={order.Address}
-                    totalAmount={order.totalAmount}
-                    paymentMethod={order.paymentMethod}
-                    items={order.items}
-                    id={order._id}
-                  />
-                </div>
-              ) : null
-            )
-          ) : (
-            
-                <section className="py-5">
-                  <div className="container text-center text-white ">
-                    <h2>No order history</h2>
-                  </div>
-                </section>
-              
-            
-          )}
-        </div>
-      </div>
-    </section>
+  <div className="container">
+    <div className="row">
+      {
+        orders.filter((order) => order.status !== "delivered").length > 0 ? (
+          orders
+            .filter((order) => order.status !== "delivered")
+            .reverse()
+            .map((order) => (
+              <div className="col-md-6" key={order._id}>
+                <Card
+                  user={order.userId.name}
+                  address={order.Address}
+                  totalAmount={order.totalAmount}
+                  paymentMethod={order.paymentMethod}
+                  items={order.items}
+                  id={order._id}
+                />
+              </div>
+            ))
+        ) : (
+          <div className="container text-center text-white py-5">
+            <h2>No order history</h2>
+          </div>
+        )
+      }
+    </div>
+  </div>
+</section>
+
   );
 };
 
