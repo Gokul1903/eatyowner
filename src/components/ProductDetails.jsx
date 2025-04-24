@@ -8,9 +8,7 @@ const ProductDetails = () => {
   const { id } = useParams();
   const { order, singleorder, updateOrderStatus, cancelOrder,errmessage } = useContext(GlobalContext);
 
-  const [buttonstate, setButtonState] = useState("");
-  const [address, setAddress] = useState("");
-  const [message, setMessage] = useState("");
+
 
   const navigate = useNavigate();
 
@@ -94,6 +92,8 @@ const ProductDetails = () => {
                   }
                 >
                   {order.status === "pending"
+                    ? "Accept"
+                    : order.status === "accepted"
                     ? "Mark as Food Ready"
                     : order.status === "foodready"
                     ? "Mark as Delivered"
