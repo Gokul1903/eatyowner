@@ -9,7 +9,7 @@ const CardList = () => {
   const [oldLength, setOldLength] = useState(0);
   const [newLength, setNewLength] = useState(0);
   const alarm = useRef(new Audio("/alarm.mp3"));
-  const isInitialMount = useRef(true);
+
   // Load audio on mount
   useEffect(() => {
     alarm.current.volume = 1.0;
@@ -39,17 +39,17 @@ const CardList = () => {
 
   // Compare newLength and oldLength
   useEffect(() => {
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-    } else {
-      if (newLength > oldLength && orders.length !== 0) {
-        alarm.current.play().catch((err) => {
-          console.error("❌ Failed to play alarm:", err);
-        });
-      }
+    if (newLength > oldLength && orders.length !== 0) {
+      
+      alarm.current.play().catch((err) => {
+        console.error("❌ Failed to play alarm:", err);
+      });
+
+      // Optional: You can trigger browser notification too
+
     }
-  
-    setOldLength(newLength); // Always update after comparison
+
+    setOldLength(newLength); // update oldLength after comparison
   }, [newLength]);
 
   // Ask notification permission once
