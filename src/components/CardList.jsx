@@ -112,6 +112,7 @@ const CardList = () => {
                   paymentMethod={order.paymentMethod}
                   items={order.items}
                   id={order._id}
+                  Phone={order.phone}
                 />
               </div>
             ))
