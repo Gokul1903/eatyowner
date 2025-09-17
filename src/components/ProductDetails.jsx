@@ -9,7 +9,6 @@ const ProductDetails = () => {
   const { order, singleorder, updateOrderStatus, cancelOrder,errmessage } = useContext(GlobalContext);
 
 
-
   const navigate = useNavigate();
 
   useEffect(() => {
