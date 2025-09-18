@@ -1,12 +1,13 @@
 import { useEffect, useContext, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalContext";
+import ProtectedRoute from "./ProtectedRoute";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const { order, singleorder, updateOrderStatus, cancelOrder,errmessage } = useContext(GlobalContext);
+  const { order, singleorder, updateOrderStatus, cancelOrder } = useContext(GlobalContext);
 
 
   const navigate = useNavigate();
@@ -27,17 +28,6 @@ const ProductDetails = () => {
         </div>
       </div>
     );
-  }
-  if(errmessage==="Unauthorized" || errmessage==="Invalid Token"){
-    return(
-      <section className="py-5">
-      <div className="container">
-        <div className="row">
-          <h1 className="text-center">Unauthorized</h1>
-        </div>
-      </div>
-    </section>
-    )
   }
 
   return (
@@ -120,4 +110,8 @@ const ProductDetails = () => {
   );
 };
 
-export default ProductDetails;
+export default() =>(
+  <ProtectedRoute>
+    <ProductDetails/>
+  </ProtectedRoute>
+);

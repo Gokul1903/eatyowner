@@ -8,7 +8,7 @@ const GlobalProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [errmessage,setMessage]=useState("")
   const [singleproduct,setSingleproduct]=useState("")
-
+  const [ownerProfile, setOwnerProfile] = useState(null);
   
 
   const fetchOrder = async () => {
@@ -30,6 +30,25 @@ const GlobalProvider = ({ children }) => {
       console.error("Error fetching orders:", error);
     }
   };
+  const fetchOwnerProfile = async () => {
+  try {
+    const response = await fetch(`${API_URL}/owner/getProfile`, {
+      method: "GET",
+      credentials: "include",
+    });
+    const data = await response.json();
+    console.log("Profile response:", data); // 👈 Add this
+    if (data.success) {
+      setOwnerProfile(data.owner);
+    } else {
+      setOwnerProfile(null);
+    }
+  } catch (error) {
+    console.error("Error fetching owner profile:", error);
+    setOwnerProfile(null);
+  }
+};
+
   const singleorder =async (id)=>{
     try {
       const responce = await fetch(`${API_URL}/owner/singleorder/${id}`,{
@@ -186,27 +205,29 @@ const GlobalProvider = ({ children }) => {
 
   return (
     <GlobalContext.Provider
-      value={{
-        products,
-        orders,
-        fetchOrder,
-        fetchProduct,
-        updateOrderStatus,
-        cancelOrder,
-        addProduct,
-        updateProduct,
-        deleteProduct,
-        singleorder,
-        order,
-        errmessage,
-        setOrders,
-        singleproduct,
-        fetchSingle
-        
-      }}
-    >
-      {children}
-    </GlobalContext.Provider>
+  value={{
+    products,
+    orders,
+    fetchOrder,
+    fetchProduct,
+    updateOrderStatus,
+    cancelOrder,
+    addProduct,
+    updateProduct,
+    deleteProduct,
+    singleorder,
+    order,
+    errmessage,
+    setOrders,
+    singleproduct,
+    fetchSingle,
+    ownerProfile,
+    fetchOwnerProfile
+  }}
+>
+  {children}
+</GlobalContext.Provider>
+
   );
 };
 

@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalContext";
+import ProtectedRoute from "./ProtectedRoute";
 const API_URL = import.meta.env.VITE_API_URL;
 const IMG_URI = import.meta.env.VITE_CLOUDINARY_BASE_URL;
 
@@ -147,4 +148,8 @@ if (!image) {
   );
 };
 
-export default UpdateProduct;
+export default ()=>(
+  <ProtectedRoute>
+    <UpdateProduct/>
+  </ProtectedRoute>
+ ) ;

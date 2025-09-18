@@ -1,9 +1,10 @@
 import { useEffect, useContext, useRef, useState } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 import Card from "./Card";
+import ProtectedRoute from "./ProtectedRoute";
 
 const CardList = () => {
-  const { orders, fetchOrder, errmessage } = useContext(GlobalContext);
+  const { orders, fetchOrder, } = useContext(GlobalContext);
   const [loading, setLoading] = useState(true);
 
   const [oldLength, setOldLength] = useState(0);
@@ -55,17 +56,6 @@ const CardList = () => {
   
 
   // Unauthorized
-  if (errmessage === "Unauthorized" || errmessage === "Invalid Token") {
-    return (
-      <section className="py-5">
-        <div className="container">
-          <div className="row">
-            <h1 className="text-center">Unauthorized</h1>
-          </div>
-        </div>
-      </section>
-    );
-  }
 
   // Loading
   if (loading) {
@@ -129,4 +119,8 @@ const CardList = () => {
   );
 };
 
-export default CardList;
+export default ()=>(
+  <ProtectedRoute>
+    <CardList/>
+  </ProtectedRoute>
+) ;

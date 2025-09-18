@@ -1,47 +1,33 @@
-import { useEffect, useContext ,useState} from "react";
+import { useEffect, useContext } from "react";
 import ProductCard from "./ProductCard";
 import { GlobalContext } from "../context/GlobalContext";
 import { Link } from "react-router-dom";
+import ProtectedRoute from "./ProtectedRoute";
 
 const Products = () => {
   const { products, fetchProduct } = useContext(GlobalContext);
-  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    const fetchdata=async()=>{
-      await fetchProduct();
-      setLoading(false)
-    }
-    fetchdata();
-    
+    fetchProduct(); // fetch products on mount
   }, []);
 
-  // Show full-screen centered spinner when loading
-  if (loading) {
-    return (
-      <div
-        className="d-flex justify-content-center align-items-center"
-        style={{ height: "80vh" }}
-      >
-        <div className="spinner-border logo" role="status">
-          <span className="visually-hidden">Loading...</span>
-          
-        </div>
-      </div>
-    );
-  }
+  // If no products
   if (products.length === 0) {
     return (
       <section className="py-5">
         <div className="container">
           <div className="row">
             <h1 className="text-center">No Product Available</h1>
-            <Link className="add-btn " to={"/add"}><i className="bi bi-bag-plus-fill"></i></Link>
+            <Link className="add-btn" to={"/add"}>
+              <i className="bi bi-bag-plus-fill"></i>
+            </Link>
           </div>
         </div>
       </section>
     );
   }
 
+  // Render products
   return (
     <section className="py-5">
       <div className="container">
@@ -58,11 +44,17 @@ const Products = () => {
               />
             </div>
           ))}
-          <Link className="add-btn " to={"/add"}><i className="bi bi-bag-plus-fill"></i></Link>
+          <Link className="add-btn" to={"/add"}>
+            <i className="bi bi-bag-plus-fill"></i>
+          </Link>
         </div>
       </div>
     </section>
   );
 };
 
-export default Products;
+export default () => (
+  <ProtectedRoute>
+    <Products />
+  </ProtectedRoute>
+);

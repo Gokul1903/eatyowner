@@ -1,10 +1,11 @@
 import { useEffect, useContext,useState } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 import Card from "./Card"
+import ProtectedRoute from "./ProtectedRoute";
 
 
 const Delivered = () => {
-  const { orders, fetchOrder,errmessage } = useContext(GlobalContext);
+  const { orders, fetchOrder } = useContext(GlobalContext);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchdata=async()=>{
@@ -19,17 +20,7 @@ const Delivered = () => {
     return () => clearInterval(interval);
   }, []);
   
-  if(errmessage==="Unauthorized" || errmessage==="Invalid Token"){
-    return(
-      <section className="py-5">
-      <div className="container">
-        <div className="row">
-          <h1 className="text-center">Unauthorized</h1>
-        </div>
-      </div>
-    </section>
-    )
-  }
+  
   if (orders.length === 0) {
     return (
       <section className="py-5">
@@ -79,4 +70,8 @@ const Delivered = () => {
   );
 };
 
-export default Delivered;
+export default ()=>(
+  <ProtectedRoute>
+    <Delivered/>
+  </ProtectedRoute>
+) ;
