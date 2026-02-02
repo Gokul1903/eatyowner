@@ -14,7 +14,6 @@ import Products from "./components/Products";
 import UpdateProduct from "./components/Update";
 import AddProduct from "./components/Addproduct";
 
-
 const MainLayout=()=>{
   return(<div className="container ">
         <div className="row">
