@@ -125,6 +125,7 @@ const GlobalProvider = ({ children }) => {
       console.error( error);
     }
   }
+  
   const fetchSingle=async(id)=>{
     try {
         const response =await fetch(`${API_URL}/owner/viewproductsingle/${id}`,{
