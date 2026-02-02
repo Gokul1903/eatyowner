@@ -34,7 +34,7 @@ const Login = () => {
               }
 
         } catch (error) {
-            setMessage("Something went wrong. Please try again.");
+            setMessage("Something went wrong. Please try again."+error);
         }
     }
     return ( 
